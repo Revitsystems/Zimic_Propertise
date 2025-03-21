@@ -800,34 +800,37 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
+      // Get the successMessage and loading elements from the DOM
+      const successMessage = document.getElementById("successMessage");
+      const loading = document.getElementById("loading");
+  
       // Attach form submit event listener
       const contactForm = document.getElementById("contactForm");
-      contactForm.addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent default form submission
-
-        // Collect form data
-        const formData = {
-          name: document.getElementById("name").value,
-          email: document.getElementById("email").value,
-          phone: document.getElementById("phone").value,
-          subject: document.getElementById("subject").value,
-          message: document.getElementById("message").value,
-        };
-
-        // Send data using axios
-        axios 
-          .post("https://zimic-propertise.onrender.com/send-email", formData)
-          .then(function (response) {
-            // Display success message
-            document.getElementById("successMessage").style.display = "block";
-            console.log("Response:", response.data);
-          })
-          .catch(function (error) {
-            console.error("Error:", error);
-            alert("Something went wrong, please try again later.");
-          });
+      contactForm.addEventListener("submit", async function (event) { // Add async keyword
+          event.preventDefault(); // Prevent default form submission
+  
+          // Collect form data
+          const formData = {
+              name: document.getElementById("name").value,
+              email: document.getElementById("email").value,
+              phone: document.getElementById("phone").value,
+              subject: document.getElementById("subject").value,
+              message: document.getElementById("message").value,
+          };
+  
+          // Send data using axios
+          try {
+              const response = await axios.post("http://localhost:5000/send-email", formData);
+              successMessage.style.display = "block";
+              contactForm.reset();
+              if (loading) loading.style.display = "none"; // Stop loading (if loading exists)
+              alert("Mail sent!");
+          } catch (error) { // Correct catch syntax
+              console.error("Error:", error);
+              alert("Something went wrong, please try again later.");
+          }
       });
-    </script>
+  </script>
   </body>
 
   <!-- Mirrored from duruthemes.com/demo/html/bauen/onepage-lightsidebar/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Jan 2025 08:10:19 GMT -->

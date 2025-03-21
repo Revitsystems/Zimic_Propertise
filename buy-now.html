@@ -123,8 +123,7 @@
                     method="post"
                     id="contactForm"
                     class="contact__form"
-                    action="https://duruthemes.com/demo/html/bauen/onepage-lightsidebar/mail.php"
-                  >
+                    action="http://localhost:5000/send-email">
                     <!-- Form message -->
                     <div class="row">
                       <div class="col-12">
@@ -253,14 +252,16 @@
     </div>
     <!-- Include Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
+    
       // Attach form submit event listener
       const contactForm = document.getElementById("contactForm");
-      contactForm.addEventListener("submit", function (event) {
+      contactForm.addEventListener("submit", async function (event) {
         event.preventDefault(); // Prevent default form submission
-
-        // Collect form data
+    
+        // Collect form data manually
         const formData = {
           name: document.getElementById("name").value,
           email: document.getElementById("email").value,
@@ -268,23 +269,30 @@
           subject: document.getElementById("subject").value,
           message: document.getElementById("message").value,
         };
-
-        // Send data using axios
-        axios
-          .post("http://localhost:5000/send-email", formData)
-          .then(function (response) {
-            // Display success message
-            document.getElementById("successMessage").style.display = "block";
-            console.log("Response:", response.data);
-            alert("Mail sent!")
-          })
-          .catch(function (error) {
-            console.error("Error:", error);
-            console.log(error)
-            alert("Something went wrong, please try again later.");
+    
+        try {
+          // Send data using axios
+          const response = await axios.post("http://localhost:5000/send-email", formData, {
+            headers: {
+              "Content-Type": "application/json",
+            },
           });
+    
+          // Handle success response
+          if (response.status === 200) {
+            contactForm.reset();
+            alert("Mail sent successfully!");
+          } else {
+            alert("Something went wrong. Please try again.");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          console.log(error)
+          alert("Something went wrong, please try again later.");
+        }
       });
     </script>
+    
     <!-- jQuery -->
     <script src="js/jquery-3.6.3.min.js"></script>
     <script src="js/jquery-migrate-3.0.0.min.js"></script>
