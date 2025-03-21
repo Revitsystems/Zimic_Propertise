@@ -24,7 +24,7 @@ const sendEmail = async (name, email, phone, subject, message) => {
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
-      },
+      },  
     });
 
     let mailOptions = {
@@ -51,6 +51,10 @@ const sendEmail = async (name, email, phone, subject, message) => {
 
 // API route to handle email sending
 app.post("/send-email", async (req, res) => {
+  
+  console.log('Received request:', req.body); // Log the incoming request data
+
+  // Your email handling logic here...
   const { name, email, phone, subject, message } = req.body;
 
   if (!name || !email || !phone || !subject || !message) {
