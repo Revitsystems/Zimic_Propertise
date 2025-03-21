@@ -7,6 +7,13 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
+
+// Enable CORS for specific origins (use for production)
+app.use(cors({
+  origin: "https://zimic-propertise.onrender.com",  // Update this with your frontend URL
+  methods: ['GET', 'POST'],
+}));
+
 app.use(express.json());
 
 // Email sending function
