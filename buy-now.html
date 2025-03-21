@@ -128,14 +128,14 @@
                     <!-- Form message -->
                     <div class="row">
                       <div class="col-12">
-                        <div
+                        <!-- <div
                           class="alert alert-success contact__msg"
                           id="successMessage"
                           style="display: none"
                           role="alert"
                         >
                           Your message was sent successfully.
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                     <!-- Form elements -->
@@ -251,24 +251,6 @@
         </div>
       </div>
     </div>
-    <!-- jQuery -->
-    <script src="js/jquery-3.6.3.min.js"></script>
-    <script src="js/jquery-migrate-3.0.0.min.js"></script>
-    <script src="js/modernizr-2.6.2.min.js"></script>
-    <script src="js/imagesloaded.pkgd.min.js"></script>
-    <script src="js/jquery.isotope.v3.0.2.js"></script>
-
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/scrollIt.min.js"></script>
-    <script src="js/smooth-scroll.min.js"></script>
-    <script src="js/jquery.waypoints.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.stellar.min.js"></script>
-    <script src="js/jquery.magnific-popup.js"></script>
-    <script src="js/YouTubePopUp.js"></script>
-    <script src="js/before-after.js"></script>
-    <script src="js/custom.js"></script>
     <!-- Include Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -289,17 +271,37 @@
 
         // Send data using axios
         axios
-          .post("https://zimic-propertise.onrender.com/send-email", formData)
+          .post("http://localhost:5000/send-email", formData)
           .then(function (response) {
             // Display success message
             document.getElementById("successMessage").style.display = "block";
             console.log("Response:", response.data);
+            alert("Mail sent!")
           })
           .catch(function (error) {
             console.error("Error:", error);
+            console.log(error)
             alert("Something went wrong, please try again later.");
           });
       });
     </script>
+    <!-- jQuery -->
+    <script src="js/jquery-3.6.3.min.js"></script>
+    <script src="js/jquery-migrate-3.0.0.min.js"></script>
+    <script src="js/modernizr-2.6.2.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/jquery.isotope.v3.0.2.js"></script>
+
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scrollIt.min.js"></script>
+    <script src="js/smooth-scroll.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/jquery.magnific-popup.js"></script>
+    <script src="js/YouTubePopUp.js"></script>
+    <script src="js/before-after.js"></script>
+    <script src="js/custom.js"></script>
   </body>
 </html>
